@@ -35,7 +35,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+    implementation 'com.facebook.android:facebook-login:[4,5)'
     implementation 'com.facebook.android:account-kit-sdk:4.+'
-   implementation 'com.googlecode.libphonenumber:libphonenumber:8.+'
+    implementation 'com.google.android.gms:play-services-base:11.6.0'
 
 }
