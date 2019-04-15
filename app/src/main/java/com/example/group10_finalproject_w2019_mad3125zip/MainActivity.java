@@ -326,6 +326,8 @@ public class MainActivity extends AppCompatActivity {
 
                     //get user phone and check exists on server
                     AccountKit.getCurrentAccount(new AccountKitCallback<Account>() {
+
+
                         @Override
                         public void onSuccess(final Account account) {
                            mService.checkUserExists(account.getPhoneNumber().toString())
@@ -353,9 +355,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
-                                        }
+                                           }
                                     });
 
                         }
