@@ -54,7 +54,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Clean all data
                 dbHelper.deleteAllItems();
-                Intent intent = new Intent(ShoppingCartActivity.this, MainActivity.class);
+                Intent intent = new Intent(ShoppingCartActivity.this, HomePageActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();

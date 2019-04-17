@@ -1,15 +1,16 @@
 package com.example.group10_finalproject_w2019_mad3125zip;
 public class ItemModel {
 
-    String name, description, price, status;
+    String name, description, price, status,urlyoImg;
 
     public ItemModel(){}
 
-    public ItemModel(String name, String description, String price, String status) {
+    public ItemModel(String name, String description, String price, String status,String urltoimg) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.status = status;
+        urlyoImg = urltoimg;
     }
 
     public String getStatus() {
@@ -42,5 +43,13 @@ public class ItemModel {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public String getUrlyoImg() {
+        return urlyoImg;
+    }
+
+    public void setUrlyoImg(String urlyoImg) {
+        this.urlyoImg = urlyoImg;
     }
 }

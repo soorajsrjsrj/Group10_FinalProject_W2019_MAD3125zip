@@ -47,7 +47,7 @@ public class DetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (dbHelper.addToCart(bundle.getInt("_id"), "1")){
-                    Intent intent = new Intent(DetailsActivity.this, MainActivity.class);
+                    Intent intent = new Intent(DetailsActivity.this, HomePageActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     finish();

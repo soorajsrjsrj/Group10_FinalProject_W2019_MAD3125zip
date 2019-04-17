@@ -12,14 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DetailsActivity"></activity>
-        <activity android:name=".ShoppingCartActivity" /> <!-- fb kit and fb login -->
+        <activity android:name=".DetailsActivity"
+            android:parentActivityName=".HomePageActivity"></activity>
+        <activity android:name=".ShoppingCartActivity"
+            android:parentActivityName=".HomePageActivity"/> <!-- fb kit and fb login -->
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity> <!-- fb login only -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -41,7 +39,14 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomePageActivity" />
+        <activity android:name=".HomePageActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <meta-data
             android:name="com.facebook.accountkit.ApplicationName"
