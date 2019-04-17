@@ -5,25 +5,23 @@ import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-import com.facebook.accountkit.AccountKit;
-import com.facebook.login.LoginManager;
-
 import java.math.BigDecimal;
 import java.sql.SQLException;
 
-public class HomePageActivity extends AppCompatActivity {
+public class ShoppingCartActivity extends AppCompatActivity {
+
     private StoreDatabase dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
+        setContentView(R.layout.activity_shopping_cart);
+
         dbHelper = new StoreDatabase(this);
         try {
             dbHelper.open();
@@ -31,15 +29,7 @@ public class HomePageActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        //check if items are available
         int total = dbHelper.getTotalItemsCount();
-        if (total<= 0){
-            //Add some data
-            dbHelper.insertMyShopItems();
-        }
-        //Generate ListView from SQLite Database
-        displayListView();
-
         int num = dbHelper.getCartItemsRowCount(1);
         int amount = dbHelper.getAmount();
         BigDecimal priceVal;
@@ -62,16 +52,24 @@ public class HomePageActivity extends AppCompatActivity {
         cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomePageActivity.this, ShoppingCartActivity.class);
+                //Clean all data
+                dbHelper.deleteAllItems();
+                Intent intent = new Intent(ShoppingCartActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                finish();
             }
         });
+
+        //Generate ListView from SQLite Database
+        displayListView();
+
     }
 
     private void displayListView() {
-        Cursor cursor = dbHelper.fetchAllItems("0"); // 0 is used to denote an item yet to be bought
+        Cursor cursor = dbHelper.fetchAllItems("1"); // 1 is used to denote an item in the shopping cart
 
-        // Display name of item to be sold
+        // Display name of item to be bought
         String[] columns = new String[] {
                 StoreDatabase.KEY_NAME
         };
@@ -94,34 +92,6 @@ public class HomePageActivity extends AppCompatActivity {
         // Assign adapter to ListView
         assert listView != null;
         listView.setAdapter(dataAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> listView, View view, int position, long id) {
-                // Get the cursor, positioned to the corresponding row in the result set
-                Cursor cursor = (Cursor) listView.getItemAtPosition(position);
-
-                // Get the item attributes to be sent to details activity from this row in the database.
-                String name =  cursor.getString(cursor.getColumnIndexOrThrow("name"));
-                String description =  cursor.getString(cursor.getColumnIndexOrThrow("description"));
-                int price =  cursor.getInt(cursor.getColumnIndexOrThrow("price"));
-                int itemId =  cursor.getInt(cursor.getColumnIndexOrThrow("_id"));
-                Intent intent = new Intent(HomePageActivity.this, DetailsActivity.class);
-                intent.putExtra("name", name);
-                intent.putExtra("description", description);
-                intent.putExtra("price", price);
-                intent.putExtra("_id", itemId);
-                startActivity(intent);
-
-            }
-        });
     }
 
-
-
-    public void logout(View view) {
-        LoginManager.getInstance().logOut();
-        AccountKit.logOut();
-        startActivity(new Intent(HomePageActivity.this, HomePageActivity.class));
-        finish();
-    }
 }

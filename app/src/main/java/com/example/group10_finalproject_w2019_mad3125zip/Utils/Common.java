@@ -6,8 +6,9 @@ import com.example.group10_finalproject_w2019_mad3125zip.Retrofit.RetrofitClient
 
 public class Common {
     //in emulator, localhost = 10.0.2.2
-
-    private static final String BASE_URL = "http://10.0.2.2:8080/ShopApp/";
+    private static final String BASE_URL = "http://infiniteidea.epizy.com/ShopApp/";
+  // private static final String BASE_URL = "http://10.0.2.2:8000/ShopApp/";
+   // private static final String BASE_URL = "http://192.168.64.2:8000/ShopApp/";
 
 
     public static User currentUser = null;

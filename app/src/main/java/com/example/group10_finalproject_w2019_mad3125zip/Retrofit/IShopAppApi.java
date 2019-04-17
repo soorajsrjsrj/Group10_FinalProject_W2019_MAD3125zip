@@ -11,7 +11,7 @@ import retrofit2.http.POST;
 public interface IShopAppApi {
     @FormUrlEncoded
     @POST("checkuser.php")
-    Call<CheckUserResponse> checkUserExists(@Field("Phone") String phone);
+    Call<CheckUserResponse> checkUserExists(@Field("phone") String phone);
 
     @FormUrlEncoded
     @POST("register.php")
